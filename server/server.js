@@ -19,7 +19,11 @@ const app = express()
 
 app.use(express.json())
 
-const clientUrl = process.env.CLIENT_URL || "*"
+let clientUrl = process.env.CLIENT_URL || "*"
+if (clientUrl.endsWith("/")) {
+	clientUrl = clientUrl.slice(0, -1)
+}
+
 app.use(cors({
 	origin: clientUrl,
 	credentials: true
