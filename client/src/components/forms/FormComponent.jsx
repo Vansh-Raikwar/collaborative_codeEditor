@@ -111,7 +111,7 @@ const FormComponent = () => {
                 />
                 <button
                     type="submit"
-                    className="mt-2 w-full rounded-md bg-primary px-8 py-3 text-lg font-semibold text-black"
+                    className="mt-2 w-full rounded-md bg-primary px-8 py-3 text-lg font-semibold text-black bg-[#7d61e1]"
                 >
                     Join
                 </button>
