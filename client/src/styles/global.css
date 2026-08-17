@@ -633,3 +633,250 @@ select {
 .animate-fade-in {
     animation: fadeIn 0.25s ease-out forwards;
 }
+
+/* ============================================================
+   Mobile toggle buttons & overlay
+   ============================================================ */
+
+.mobile-menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--border-radius-md);
+    border: none;
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font-size: 20px;
+    transition: background 0.2s, color 0.2s;
+    flex-shrink: 0;
+}
+
+.mobile-menu-btn:hover {
+    background: var(--color-background-tertiary);
+    color: var(--color-text-primary);
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 90;
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.sidebar-overlay.visible {
+    display: block;
+}
+
+.mobile-close-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-background-tertiary);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s, color 0.2s;
+    flex-shrink: 0;
+}
+
+.mobile-close-btn:hover {
+    background: var(--color-border-secondary);
+    color: var(--color-text-primary);
+}
+
+/* ============================================================
+   Tablet breakpoint: 769px – 1024px
+   ============================================================ */
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .right-panel {
+        width: 220px;
+    }
+
+    .topbar {
+        padding: 0 12px;
+    }
+
+    .topbar-left {
+        gap: 10px;
+    }
+
+    .topbar-right {
+        gap: 10px;
+    }
+
+    .breadcrumb {
+        max-width: 180px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .statusbar {
+        padding: 0 12px;
+        gap: 12px;
+    }
+}
+
+/* ============================================================
+   Mobile breakpoint: ≤ 768px
+   ============================================================ */
+
+@media (max-width: 768px) {
+    /* --- Topbar --- */
+    .topbar {
+        padding: 0 10px;
+        height: 44px;
+        gap: 8px;
+    }
+
+    .topbar-left {
+        gap: 8px;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .topbar-right {
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .logo span {
+        font-size: 12px;
+    }
+
+    .logo i, .logo svg {
+        font-size: 16px;
+    }
+
+    .breadcrumb {
+        display: none;
+    }
+
+    .avatars {
+        display: none;
+    }
+
+    .live-label span:last-child {
+        display: none;
+    }
+
+    .invite-btn span {
+        display: none;
+    }
+
+    .invite-btn {
+        padding: 6px 8px;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    /* --- Sidebar (overlay drawer from left) --- */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 280px;
+        max-width: 85vw;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: none;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .mobile-close-btn {
+        display: flex;
+    }
+
+    /* --- Right panel (overlay from right) --- */
+    .right-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 320px;
+        max-width: 90vw;
+        z-index: 100;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: none;
+    }
+
+    .right-panel.open {
+        transform: translateX(0);
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.4);
+    }
+
+    /* --- Editor area fills the space --- */
+    .main-workspace {
+        position: relative;
+    }
+
+    .editor-area {
+        width: 100%;
+    }
+
+    /* --- Tab bar --- */
+    .tab-bar {
+        padding: 0 6px;
+        gap: 2px;
+    }
+
+    .tab {
+        padding: 0 10px;
+        font-size: 11px;
+    }
+
+    /* --- Statusbar --- */
+    .statusbar {
+        height: 22px;
+        padding: 0 10px;
+        gap: 8px;
+        font-size: 9px;
+    }
+
+    .status-item {
+        font-size: 9px;
+    }
+
+    .status-item i, .status-item svg {
+        font-size: 10px;
+    }
+
+    .status-right {
+        gap: 8px;
+    }
+
+    /* --- Panel tabs (right panel) --- */
+    .panel-tab {
+        font-size: 10px;
+        padding: 8px 0;
+    }
+
+    /* Hide secondary status items on mobile */
+    .status-hide-mobile {
+        display: none;
+    }
+}

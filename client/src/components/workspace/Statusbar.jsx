@@ -19,18 +19,18 @@ function Statusbar() {
                 <BiGitBranch size={14} className="text-[#CECBF6]" />
                 <span>main ({roomId.slice(0, 8)})</span>
             </div>
-            <div className="status-item opacity-80">
+            <div className="status-item opacity-80 status-hide-mobile">
                 <VscCheckAll size={14} className="text-emerald-300" />
                 <span>No issues</span>
             </div>
 
             <div className="status-right">
                 {activeFile && (
-                    <div className="status-item opacity-80">
+                    <div className="status-item opacity-80 status-hide-mobile">
                         <span>{activeFile.name}</span>
                     </div>
                 )}
-                <div className="status-item opacity-80">
+                <div className="status-item opacity-80 status-hide-mobile">
                     <span>UTF-8</span>
                 </div>
                 <div className="status-item font-medium">

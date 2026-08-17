@@ -48,6 +48,7 @@ function RunView() {
                                     <option
                                         key={i}
                                         value={JSON.stringify(lang)}
+                                        className="bg-[#13151a] text-white"
                                     >
                                         {lang.language +
                                             (lang.version

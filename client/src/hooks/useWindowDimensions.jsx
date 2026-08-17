@@ -6,14 +6,19 @@ function useWindowDimensions() {
         height: window.innerHeight,
     })
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+    const [isTablet, setIsTablet] = useState(
+        window.innerWidth >= 768 && window.innerWidth <= 1024
+    )
 
     useEffect(() => {
         const updateWindowDimensions = () => {
+            const w = window.innerWidth
             setWindowDimensions({
-                width: window.innerWidth,
+                width: w,
                 height: window.innerHeight,
             })
-            setIsMobile(window.innerWidth < 768)
+            setIsMobile(w < 768)
+            setIsTablet(w >= 768 && w <= 1024)
         }
 
         window.addEventListener("resize", updateWindowDimensions)
@@ -22,7 +27,7 @@ function useWindowDimensions() {
             window.removeEventListener("resize", updateWindowDimensions)
         }
     }, [])
-    return { ...windowDimensions, isMobile }
+    return { ...windowDimensions, isMobile, isTablet }
 }
 
 export default useWindowDimensions

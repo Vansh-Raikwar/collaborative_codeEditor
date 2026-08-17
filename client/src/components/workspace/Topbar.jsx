@@ -7,8 +7,10 @@ import toast from "react-hot-toast"
 import { IoCodeSlash } from "react-icons/io5"
 import { LuUserPlus } from "react-icons/lu"
 import { MdOutlineDraw } from "react-icons/md"
+import { HiOutlineMenuAlt2 } from "react-icons/hi"
+import { PiChatCircleDots } from "react-icons/pi"
 
-function Topbar() {
+function Topbar({ onToggleSidebar, onToggleRightPanel }) {
     const { users, activityState, setActivityState } = useAppContext()
     const { activeFile, fileStructure } = useFileSystem()
     const { socket } = useSocket()
@@ -67,6 +69,15 @@ function Topbar() {
     return (
         <div className="topbar">
             <div className="topbar-left">
+                {/* Mobile hamburger */}
+                <button
+                    className="mobile-menu-btn"
+                    onClick={onToggleSidebar}
+                    title="Toggle Sidebar"
+                    aria-label="Toggle Sidebar"
+                >
+                    <HiOutlineMenuAlt2 size={20} />
+                </button>
                 <div className="logo">
                     <IoCodeSlash aria-hidden="true" />
                     <span>CodeSync</span>
@@ -134,6 +145,15 @@ function Topbar() {
                 <button className="invite-btn" onClick={copyInviteLink}>
                     <LuUserPlus aria-hidden="true" />
                     <span>Invite</span>
+                </button>
+                {/* Mobile right panel toggle */}
+                <button
+                    className="mobile-menu-btn"
+                    onClick={onToggleRightPanel}
+                    title="Toggle Panel"
+                    aria-label="Toggle Panel"
+                >
+                    <PiChatCircleDots size={20} />
                 </button>
             </div>
         </div>

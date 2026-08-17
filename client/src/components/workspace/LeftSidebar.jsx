@@ -10,6 +10,7 @@ import { getIconClassName } from "@/utils/getIconClassName"
 import { Icon } from "@iconify/react"
 import cn from "classnames"
 import { AiOutlineFolder, AiOutlineFolderOpen } from "react-icons/ai"
+import { IoClose } from "react-icons/io5"
 import { MdDelete } from "react-icons/md"
 import { PiPencilSimpleFill } from "react-icons/pi"
 import {
@@ -25,7 +26,7 @@ import RenameView from "@/components/files/RenameView"
 
 const collabColors = ["#CECBF6", "#9FE1CB", "#F5C4B3", "#B5D4F4"]
 
-function LeftSidebar() {
+function LeftSidebar({ isOpen, onClose }) {
     const {
         fileStructure,
         createFile,
@@ -242,10 +243,20 @@ function LeftSidebar() {
     const remoteUsers = users.filter((u) => u.username !== currentUser?.username)
 
     return (
-        <aside className="sidebar select-none" onClick={handleClickOutside}>
+        <aside className={cn("sidebar select-none", { open: isOpen })} onClick={handleClickOutside}>
             <div className="sidebar-section" ref={explorerRef}>
                 <div className="sidebar-label">
-                    <span>Explorer</span>
+                    <div className="flex items-center gap-2">
+                        <button
+                            className="mobile-close-btn"
+                            onClick={onClose}
+                            title="Close Sidebar"
+                            aria-label="Close Sidebar"
+                        >
+                            <IoClose size={16} />
+                        </button>
+                        <span>Explorer</span>
+                    </div>
                     <div className="flex gap-2">
                         <button
                             className="rounded p-0.5 hover:bg-darkHover text-textSecondary hover:text-textPrimary"

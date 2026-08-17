@@ -4,13 +4,25 @@ import ChatInput from "@/components/chats/ChatInput"
 import CopilotView from "@/components/sidebar/sidebar-views/CopilotView"
 import RunView from "@/components/sidebar/sidebar-views/RunView"
 import SettingsView from "@/components/sidebar/sidebar-views/SettingsView"
+import cn from "classnames"
+import { IoClose } from "react-icons/io5"
 
-function RightPanel() {
+function RightPanel({ isOpen, onClose }) {
     const [activeTab, setActiveTab] = useState("comments")
 
     return (
-        <aside className="right-panel">
+        <aside className={cn("right-panel", { open: isOpen })}>
             <div className="panel-tabs">
+                {/* Mobile close button */}
+                <button
+                    className="mobile-close-btn"
+                    onClick={onClose}
+                    title="Close Panel"
+                    aria-label="Close Panel"
+                    style={{ margin: "0 4px 0 8px" }}
+                >
+                    <IoClose size={16} />
+                </button>
                 <button
                     className={`panel-tab ${activeTab === "comments" ? "active" : ""}`}
                     onClick={() => setActiveTab("comments")}

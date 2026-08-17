@@ -741,3 +741,54 @@ body {
   font-size: 11px;
   margin-top: 4px;
 }
+
+/* ============================================================
+   Tablet breakpoint: 769px – 1024px
+   ============================================================ */
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .join-card {
+    width: 340px;
+    padding: 28px;
+  }
+}
+
+/* ============================================================
+   Mobile breakpoint: ≤ 768px
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .join-container {
+    padding: 16px;
+  }
+
+  .join-card {
+    width: 100%;
+    max-width: 360px;
+    padding: 24px;
+    border-radius: 12px;
+  }
+
+  .join-logo {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .join-logo i {
+    font-size: 22px;
+  }
+
+  .join-input {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .join-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .join-form {
+    gap: 14px;
+  }
+}

@@ -8,9 +8,10 @@ import { useAppContext } from "@/context/AppContext"
 import { useSocket } from "@/context/SocketContext"
 import useFullScreen from "@/hooks/useFullScreen"
 import useUserActivity from "@/hooks/useUserActivity"
+import useWindowDimensions from "@/hooks/useWindowDimensions"
 import { SocketEvent } from "@/types/socket"
 import { USER_STATUS } from "@/types/user"
-import { useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 
 function EditorPage() {
@@ -23,6 +24,38 @@ function EditorPage() {
     const { status, setCurrentUser, currentUser } = useAppContext()
     const { socket } = useSocket()
     const location = useLocation()
+    const { isMobile } = useWindowDimensions()
+
+    // Mobile drawer states
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [rightPanelOpen, setRightPanelOpen] = useState(false)
+
+    const toggleSidebar = useCallback(() => {
+        setSidebarOpen((prev) => {
+            if (!prev) setRightPanelOpen(false) // close right panel when opening sidebar
+            return !prev
+        })
+    }, [])
+
+    const toggleRightPanel = useCallback(() => {
+        setRightPanelOpen((prev) => {
+            if (!prev) setSidebarOpen(false) // close sidebar when opening right panel
+            return !prev
+        })
+    }, [])
+
+    const closeAllPanels = useCallback(() => {
+        setSidebarOpen(false)
+        setRightPanelOpen(false)
+    }, [])
+
+    // Close drawers when switching away from mobile
+    useEffect(() => {
+        if (!isMobile) {
+            setSidebarOpen(false)
+            setRightPanelOpen(false)
+        }
+    }, [isMobile])
 
     useEffect(() => {
         if (currentUser.username.length > 0) return
@@ -49,13 +82,29 @@ function EditorPage() {
         return <ConnectionStatusPage />
     }
 
+    const showOverlay = isMobile && (sidebarOpen || rightPanelOpen)
+
     return (
         <div className="app-root">
-            <Topbar />
+            <Topbar
+                onToggleSidebar={toggleSidebar}
+                onToggleRightPanel={toggleRightPanel}
+            />
             <div className="main-workspace">
-                <LeftSidebar />
+                {/* Overlay backdrop for mobile drawers */}
+                <div
+                    className={`sidebar-overlay ${showOverlay ? "visible" : ""}`}
+                    onClick={closeAllPanels}
+                />
+                <LeftSidebar
+                    isOpen={sidebarOpen}
+                    onClose={() => setSidebarOpen(false)}
+                />
                 <WorkSpace />
-                <RightPanel />
+                <RightPanel
+                    isOpen={rightPanelOpen}
+                    onClose={() => setRightPanelOpen(false)}
+                />
             </div>
             <Statusbar />
         </div>
